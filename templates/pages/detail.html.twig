@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>{{ record.title}}</h3>
+            </div>
+        </div>
+        <hr>
+        <div class="row justify-content-between no-gutters">
+            {% if (record.image) %}
+                <div class="col-md-4">
+                    <img src="{{ record.image }}" class="img" alt="{{ record.image }}">
+                </div>
+                <div class="col-md-7">
+                    {% if(record.quote) %}
+                        <blockquote class="blockquote"><span style="font-style: italic">"{{ record.quote }}"</span></blockquote>
+                    {% endif %}
+                    <p>Start Datum: {{ record.date|date('Y-m-d') }}</p>
+                    <h6>Beschrijving:</h6>
+                    <p>
+                        {{ record.description }}
+                    </p>
+                    <div class="row" style="justify-content: space-between">
+                        <div class="col-2">
+                            <p class="likes">{{ record.likes }} Likes!</p>
+                        </div>
+                        <div class="col-4">
+                            <div class="row" style="justify-content: flex-end">
+
+                                <form action="{{ asset("like/#{record.id}") }}" method="post">
+                                    <input type="submit" class="btn btn-primary" id="likeButton" value="Like dit kamp!">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-md-10">
+                    {% if(record.quote) %}
+                        <blockquote class="blockquote"><span style="font-style: italic">"{{ record.quote }}"</span></blockquote>
+                    {% endif %}
+                    <p>Start Datum: {{ record.date|date('Y-m-d') }}</p>
+                    <h6>Beschrijving:</h6>
+                    <p>
+                        {{ record.description }}
+                    </p>
+                </div>
+            {% endif %}
+        </div>
+        <hr>
+        <p><small class="text-muted">Created at: {{ record.createdAt|date('Y-m-d H:i:s') }}</small></p>
+        <hr>
+        <div class="row">
+            <h3>Comments</h3>
+        </div>
+        {{ form_start(form, {'attr': {'class': 'addCampForm form'}}) }}
+            <div class="form-group">
+                {{ form_label(form.name, 'Naam') }}
+                {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.description, 'Comment') }}
+                {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        {{ form_row(form.save, { 'attr': {'class' : 'btn btn-info'}}) }}
+        {{ form_end(form) }}
+        <hr>
+        {% if (error is same as('')) %}
+            {% for comment in comments %}
+                <div class="row">
+                    <div class="card card-container" style="width: 100%">
+                        <div class="card-header" style="width: 100%">
+                            Comment #{{ loop.index }}
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                                <p>{{ comment.description }}</p>
+                                <footer class="blockquote-footer">{{ comment.name }}</footer>
+                            </blockquote>
+                        </div>
+                        <div class="card-footer text-muted">
+                            {{ comment.timeAgo }}
+                            {{ comment.created_at_slug }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="row">
+                <p>{{ error }}</p>
+            </div>
+        {% endif %}
+        {{ knp_pagination_render(comments) }}
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        (function() {
+            document.addEventListener('load', () => {
+                const elLikeButton = document.getElementById('likeButton');
+                if(!localStorage.getItem({{ record.id }})) {
+                    elLikeButton.disabled = false;
+                } else {
+                    elLikeButton.disabled = true;
+                }
+                elLikeButton.addEventListener('click', () => {
+                    if(!localStorage.getItem({{ record.id }})) {
+                        localStorage.setItem({{ record.id }}, true);
+                        elLikeButton.disabled = true;
+                    }
+                })
+            }, false);
+        })();
+    </script>
+{% endblock %}

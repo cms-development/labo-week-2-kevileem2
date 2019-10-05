@@ -1,0 +1,167 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h3>Promoted Kamp</h3>
+        </div>
+    </div>
+    <hr>
+    {% if(record_promoted) %}
+    <div class="row">
+        <div class="card col-12 card-container">
+            <div class="row no-gutters">
+                {% if (record_promoted.image) %}
+                    <div class="col-md-4">
+                        <img src="{{ record_promoted.image }}" class="card-img" alt="{{ record_promoted.image }}">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ record_promoted.title }}</h5>
+                            {% if(record_promoted.quote) %}
+                                <blockquote class="blockquote"><span style="font-style: italic">"{{ record_promoted.quote }}"</span></blockquote>
+                            {% endif %}
+                            <p class="card-text">Start Datum: {{ record_promoted.date|date('Y-m-d') }}</p>
+                            <h6 class="card-text">Beschrijving:</h6>
+                            <p class="card-text">
+                                {% if (record_promoted.description|length > 130) %}
+                                    {{ record_promoted.description|slice(0, 130) }}...
+                                {% else %}
+                                    {{ record_promoted.description }}
+                                {% endif %}
+                            </p>
+                            <p class="likes">{{ record_promoted.likes }} Likes!</p>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ record_promoted.title }}</h5>
+                            {% if(record_promoted.quote) %}
+                                <blockquote class="blockquote"><span style="font-style: italic">"{{ record_promoted.quote }}"</span></blockquote>
+                            {% endif %}
+                            <p class="card-text">Start Datum: {{ record_promoted.date|date('Y-m-d') }}</p>
+                            <h6 class="card-text">Beschrijving:</h6>
+                            <p class="card-text">
+                                {% if (record_promoted.description|length > 300) %}
+                                    {{ record_promoted.description|slice(0, 300) }}...
+                                {% else %}
+                                    {{ record_promoted.description }}
+                                {% endif %}
+                            </p>
+                            <p class="likes">{{ record_promoted.likes }} Likes!</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="card-footer bg-transparent">
+                <div class="row">
+                    <div class="col-md-10">
+                        <p class="card-text"><small class="text-muted">Created at: {{ record_promoted.createdAt|date('Y-m-d H:i:s') }}</small></p>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="row" style="justify-content: flex-end">
+                            <a href="{{ asset("/kamp/#{record_promoted.id}") }}"><button class="btn btn-primary">Bekijk kamp!</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+        <div class="row">
+            <div class="card col-12">
+                <div class="card-body">
+                    <h5 class="card-title">Nog geen kampen in promotie!</h5>
+                    <p class="card-text">Als je wil kan je nu een kamp toevoegen en deze promoten op onze geweldige website!</p>
+                    <a href="{{ asset('/admin/create') }}" class="btn btn-primary" style="color: white !important;">Maak een nieuw kamp!</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="row" style="margin-top: 40px">
+        <div class="col-12">
+            <h3>Meest recente Kampen!</h3>
+        </div>
+    </div>
+    <hr>
+    {% if(fewCamps) %}
+    <div class="row">
+        {% for camp in fewCamps %}
+            <div class="card col-md-12 card-container">
+                <div class="row no-gutters">
+                    {% if (camp.image) %}
+                        <div class="col-md-4">
+                            <img src="{{ camp.image }}" class="card-img" alt="{{ camp.image }}">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ camp.title }}</h5>
+                                {% if(camp.quote) %}
+                                    <blockquote class="blockquote"><span style="font-style: italic">"{{ camp.quote }}"</span></blockquote>
+                                {% endif %}
+                                <p class="card-text">Start Datum: {{ camp.date|date('Y-m-d') }}</p>
+                                <h6 class="card-text">Beschrijving:</h6>
+                                <p class="card-text">
+                                    {% if (camp.description|length > 130) %}
+                                        {{ camp.description|slice(0, 130) }}...
+                                    {% else %}
+                                        {{ camp.description }}
+                                    {% endif %}
+                                </p>
+                                <p class="likes">{{ camp.likes }} Likes!</p>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="col-md-12">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ camp.title }}</h5>
+                                {% if(camp.quote) %}
+                                    <blockquote class="blockquote"><span style="font-style: italic">"{{ camp.quote }}"</span></blockquote>
+                                {% endif %}
+                                <p class="card-text">Start Datum: {{ camp.date|date('Y-m-d') }}</p>
+                                <h6 class="card-text">Beschrijving:</h6>
+                                <p class="card-text">
+                                    {% if (camp.description|length > 300) %}
+                                        {{ camp.description|slice(0, 300) }}...
+                                    {% else %}
+                                        {{ camp.description }}
+                                    {% endif %}
+                                </p>
+                                <p class="likes">{{ camp.likes }} Likes!</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="card-footer bg-transparent">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <p class="card-text"><small class="text-muted">Created at: {{ camp.createdAt|date('Y-m-d H:i:s') }}</small></p>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="row" style="justify-content: flex-end">
+                                <a href="{{ asset("/kamp/#{camp.id}") }}"><button class="btn btn-primary">Bekijk kamp!</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="card col-12">
+                <div class="card-body">
+                    <h5 class="card-title">Nog geen kampen!</h5>
+                    <p class="card-text">Als je wil kan je nu een kamp toevoegen en deze tonen op onze geweldige website!</p>
+                    <a href="{{ asset('/admin/create') }}" class="btn btn-primary" style="color: white !important;">Maak een nieuw kamp!</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
