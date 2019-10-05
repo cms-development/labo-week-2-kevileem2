@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {{ form_start(form, {'attr': {'class': 'addCampForm form'}}) }}
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        {{ form_label(form.title, 'Titel') }}
+                        {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        {{ form_label(form.date, 'Start datum') }}
+                        {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        {{ form_label(form.description, 'Beschrijving') }}
+                        {{ form_widget(form.description, {'attr': {'class': 'form-control description'}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        {{ form_label(form.quote, 'Quote') }}
+                        {{ form_widget(form.quote, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        {{ form_label(form.image, 'Afbeelding (URL)') }}
+                        {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-check">
+                        {{ form_widget(form.promotion) }}
+                        {{ form_label(form.promotion, 'Promotie')}}
+                    </div>
+                </div>
+            </div>
+            {{ form_row(form.save, { 'attr': {'class' : 'btn btn-info my-2 my-sm-0'}}) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+{% endblock %}
