@@ -26,14 +26,11 @@
                     </p>
                     <div class="row" style="justify-content: space-between">
                         <div class="col-2">
-                            <p class="likes">{{ record.likes }} Likes!</p>
+                            <p class="likes" id="{{ record.id }}p">{{ record.likes }} Likes!</p>
                         </div>
                         <div class="col-4">
-                            <div class="row" style="justify-content: flex-end">
-
-                                <form action="{{ asset("like/#{record.id}") }}" method="post">
-                                    <input type="submit" class="btn btn-primary" id="likeButton" value="Like dit kamp!">
-                                </form>
+                            <div class="row" style="justify-content: flex-end" id="{{ record.id }}">
+                                <button class="btn btn-primary likeButton">Like dit kamp!</button>
                             </div>
                         </div>
                     </div>
@@ -48,6 +45,16 @@
                     <p>
                         {{ record.description }}
                     </p>
+                    <div class="row" style="justify-content: space-between">
+                        <div class="col-2">
+                            <p class="likes" id="{{ record.id }}p">{{ record.likes }} Likes!</p>
+                        </div>
+                        <div class="col-4">
+                            <div class="row" style="justify-content: flex-end" id="{{ record.id }}">
+                                <button class="btn btn-primary" id="likeButton">Like dit kamp!</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             {% endif %}
         </div>
@@ -98,22 +105,5 @@
     </div>
 {% endblock %}
 {% block scripts %}
-    <script>
-        (function() {
-            document.addEventListener('load', () => {
-                const elLikeButton = document.getElementById('likeButton');
-                if(!localStorage.getItem({{ record.id }})) {
-                    elLikeButton.disabled = false;
-                } else {
-                    elLikeButton.disabled = true;
-                }
-                elLikeButton.addEventListener('click', () => {
-                    if(!localStorage.getItem({{ record.id }})) {
-                        localStorage.setItem({{ record.id }}, true);
-                        elLikeButton.disabled = true;
-                    }
-                })
-            }, false);
-        })();
-    </script>
+    <script src="{{ asset('js/vote.js') }}"></script>
 {% endblock %}
