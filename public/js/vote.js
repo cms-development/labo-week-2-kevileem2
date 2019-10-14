@@ -12,12 +12,13 @@ upvote = (e) => {
             },
             body: JSON.stringify(data)
         })
-            .then(function (response) {
+            .then((response) => {
                 const likes = parseInt(document.getElementById(id + "p").innerHTML) + 1
                 document.getElementById(id + "p").innerHTML = `${likes} likes!`
                 document.getElementById("likeButton").disabled = true
             })
-            .catch(function (error) {
+            .catch((e) => {
+                console.log(e)
             });
     }
 }
@@ -26,11 +27,7 @@ addToLikes = (id) => {
     let double = false
     if(window.localStorage.getItem('likes')) {
         let likes = JSON.parse(window.localStorage.getItem('likes'))
-        likes.forEach((like) => {
-            if(like === id) {
-                double = true
-            }
-        })
+        double = likes.includes(id)
         if(!double) {
             likes.push(id)
             window.localStorage.setItem('likes', JSON.stringify(likes))
@@ -46,19 +43,10 @@ addToLikes = (id) => {
     }
 }
 
-checkIfLike = (id) => {
-    if(window.localStorage.getItem('likes')) {
-        let likes = JSON.parse(window.localStorage.getItem('likes'))
-        likes.forEach((like, index) => {
-            if (like === id) {
-                likes.splice(index, 1)
-                window.localStorage.setItem('likes', JSON.stringify(likes))
-            }
-        })
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function(event) {
+document.addEventListener('DOMContentLoaded', () => {
     const likeButton = document.getElementById("likeButton")
+    const parentNode = likeButton.parentElement
+    const liked = window.localStorage.getItem('likes').includes(parentNode.id)
+    liked ? likeButton.disabled = true : likeButton.disabled = false
     likeButton.addEventListener('click',upvote)
 })

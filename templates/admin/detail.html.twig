@@ -25,8 +25,8 @@
                     {% if(record.quote) %}
                         <blockquote class="blockquote"><span style="font-style: italic">"{{ record.quote }}"</span></blockquote>
                     {% endif %}
-                    <p>Start Datum: {{ record.date|date('Y-m-d') }}</p>
-                    <h6>Beschrijving:</h6>
+                    <p>{{"Start datum"|trans}}: {{ record.date|date('Y-m-d') }}</p>
+                    <h6>{{"Beschrijving"|trans}}:</h6>
                     <p>
                         {{ record.description }}
                     </p>
@@ -37,8 +37,8 @@
                     {% if(record.quote) %}
                         <blockquote class="blockquote"><span style="font-style: italic">"{{ record.quote }}"</span></blockquote>
                     {% endif %}
-                    <p>Start Datum: {{ record.date|date('Y-m-d') }}</p>
-                    <h6>Beschrijving:</h6>
+                    <p>{{"Start datum"|trans}}: {{ record.date|date('Y-m-d') }}</p>
+                    <h6>{{"Beschrijving"|trans}}:</h6>
                     <p>
                         {{ record.description }}
                     </p>
@@ -46,17 +46,17 @@
             {% endif %}
             </div>
             <hr>
-            <p><small class="text-muted">Created at: {{ record.createdAt|date('Y-m-d H:i:s') }}</small></p>
+            <p><small class="text-muted">{{"Aangemaakt op"|trans}}: {{ record.createdAt|date('Y-m-d H:i:s') }}</small></p>
         <hr>
         <div class="row">
-            <h3>Comments</h3>
+            <h3>{{ "Opmerkingen"|trans }}</h3>
         </div>
         {% if (error is same as('')) %}
             {% for comment in comments %}
                 <div class="row">
                     <div class="card card-container" style="width: 100%">
                         <div class="card-header" style="width: 100%">
-                            Comment #{{ loop.index }}
+                            {{"Opmerking"|trans}} #{{ loop.index }}
                         </div>
                         <div class="card-body">
                             <blockquote class="blockquote mb-0">

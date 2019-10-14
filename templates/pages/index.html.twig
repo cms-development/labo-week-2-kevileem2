@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h3>Promoted Kamp</h3>
+            <h3>{{"Kampen in de kijker"|trans}}!</h3>
         </div>
     </div>
     <hr>
@@ -24,8 +24,8 @@
                             {% if(record_promoted.quote) %}
                                 <blockquote class="blockquote"><span style="font-style: italic">"{{ record_promoted.quote }}"</span></blockquote>
                             {% endif %}
-                            <p class="card-text">Start Datum: {{ record_promoted.date|date('Y-m-d') }}</p>
-                            <h6 class="card-text">Beschrijving:</h6>
+                            <p class="card-text">{{"Start datum"|trans}}: {{ record_promoted.date|date('Y-m-d') }}</p>
+                            <h6 class="card-text">{{"Beschrijving"|trans}}:</h6>
                             <p class="card-text">
                                 {% if (record_promoted.description|length > 130) %}
                                     {{ record_promoted.description|slice(0, 130) }}...
@@ -43,8 +43,8 @@
                             {% if(record_promoted.quote) %}
                                 <blockquote class="blockquote"><span style="font-style: italic">"{{ record_promoted.quote }}"</span></blockquote>
                             {% endif %}
-                            <p class="card-text">Start Datum: {{ record_promoted.date|date('Y-m-d') }}</p>
-                            <h6 class="card-text">Beschrijving:</h6>
+                            <p class="card-text">{{"Start datum"|trans}}: {{ record_promoted.date|date('Y-m-d') }}</p>
+                            <h6 class="card-text">{{"Beschrijving"|trans}}:</h6>
                             <p class="card-text">
                                 {% if (record_promoted.description|length > 300) %}
                                     {{ record_promoted.description|slice(0, 300) }}...
@@ -60,11 +60,11 @@
             <div class="card-footer bg-transparent">
                 <div class="row">
                     <div class="col-md-10">
-                        <p class="card-text"><small class="text-muted">Created at: {{ record_promoted.createdAt|date('Y-m-d H:i:s') }}</small></p>
+                        <p class="card-text"><small class="text-muted">{{"Aangemaakt op"|trans}}: {{ record_promoted.createdAt|date('Y-m-d H:i:s') }}</small></p>
                     </div>
                     <div class="col-md-2">
                         <div class="row" style="justify-content: flex-end">
-                            <a href="{{ asset("/kamp/#{record_promoted.id}") }}"><button class="btn btn-primary">Bekijk kamp!</button></a>
+                            <a href="{{ asset("/kamp/#{record_promoted.id}") }}"><button class="btn btn-primary">{{"Bekijk kamp"|trans}}!</button></a>
                         </div>
                     </div>
                 </div>
@@ -75,16 +75,16 @@
         <div class="row">
             <div class="card col-12">
                 <div class="card-body">
-                    <h5 class="card-title">Nog geen kampen in promotie!</h5>
-                    <p class="card-text">Als je wil kan je nu een kamp toevoegen en deze promoten op onze geweldige website!</p>
-                    <a href="{{ asset('/admin/create') }}" class="btn btn-primary" style="color: white !important;">Maak een nieuw kamp!</a>
+                    <h5 class="card-title">{{"Nog geen kampen in promotie"|trans}}!</h5>
+                    <p class="card-text">{{"Als je wil kan je nu een kamp toevoegen en deze promoten op onze geweldige website"|trans}}!</p>
+                    <a href="{{ asset('/admin/create') }}" class="btn btn-primary" style="color: white !important;">{{"Maak een nieuw kamp"|trans}}!</a>
                 </div>
             </div>
         </div>
     {% endif %}
     <div class="row" style="margin-top: 40px">
         <div class="col-12">
-            <h3>Meest recente Kampen!</h3>
+            <h3>{{"Meest recente Kampen"|trans}}!</h3>
         </div>
     </div>
     <hr>
@@ -103,8 +103,8 @@
                                 {% if(camp.quote) %}
                                     <blockquote class="blockquote"><span style="font-style: italic">"{{ camp.quote }}"</span></blockquote>
                                 {% endif %}
-                                <p class="card-text">Start Datum: {{ camp.date|date('Y-m-d') }}</p>
-                                <h6 class="card-text">Beschrijving:</h6>
+                                <p class="card-text">{{"Start datum"|trans}}: {{ camp.date|date('Y-m-d') }}</p>
+                                <h6 class="card-text">{{"Beschrijving"|trans}}:</h6>
                                 <p class="card-text">
                                     {% if (camp.description|length > 130) %}
                                         {{ camp.description|slice(0, 130) }}...
@@ -122,8 +122,8 @@
                                 {% if(camp.quote) %}
                                     <blockquote class="blockquote"><span style="font-style: italic">"{{ camp.quote }}"</span></blockquote>
                                 {% endif %}
-                                <p class="card-text">Start Datum: {{ camp.date|date('Y-m-d') }}</p>
-                                <h6 class="card-text">Beschrijving:</h6>
+                                <p class="card-text">{{"Start datum"|trans}}: {{ camp.date|date('Y-m-d') }}</p>
+                                <h6 class="card-text">{{"Beschrijving"|trans}}:</h6>
                                 <p class="card-text">
                                     {% if (camp.description|length > 300) %}
                                         {{ camp.description|slice(0, 300) }}...
@@ -139,11 +139,11 @@
                 <div class="card-footer bg-transparent">
                     <div class="row">
                         <div class="col-md-10">
-                            <p class="card-text"><small class="text-muted">Created at: {{ camp.createdAt|date('Y-m-d H:i:s') }}</small></p>
+                            <p class="card-text"><small class="text-muted">{{"Aangemaakt op"|trans}}: {{ camp.createdAt|date('Y-m-d H:i:s') }}</small></p>
                         </div>
                         <div class="col-md-2">
                             <div class="row" style="justify-content: flex-end">
-                                <a href="{{ asset("/kamp/#{camp.id}") }}"><button class="btn btn-primary">Bekijk kamp!</button></a>
+                                <a href="{{ asset("/kamp/#{camp.id}") }}"><button class="btn btn-primary">{{"Bekijk kamp"|trans}}!</button></a>
                             </div>
                         </div>
                     </div>
@@ -155,9 +155,9 @@
         <div class="row">
             <div class="card col-12">
                 <div class="card-body">
-                    <h5 class="card-title">Nog geen kampen!</h5>
-                    <p class="card-text">Als je wil kan je nu een kamp toevoegen en deze tonen op onze geweldige website!</p>
-                    <a href="{{ asset('/admin/create') }}" class="btn btn-primary" style="color: white !important;">Maak een nieuw kamp!</a>
+                    <h5 class="card-title">{{"Nog geen kampen"|trans}}!</h5>
+                    <p class="card-text">{{"Als je wil kan je nu een kamp toevoegen en deze tonen op onze geweldige website"|trans}}!</p>
+                    <a href="{{ asset('/admin/create') }}" class="btn btn-primary" style="color: white !important;">{{"Maak een nieuw kamp"|trans}}!</a>
                 </div>
             </div>
         </div>
